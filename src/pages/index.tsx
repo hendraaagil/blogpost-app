@@ -2,6 +2,8 @@ import Head from 'next/head'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Button, Typography } from 'antd'
 
+import { cn } from '@/lib/utils'
+
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
@@ -21,8 +23,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Typography.Title level={1}>Title</Typography.Title>
+      <div className={cn(geistSans.variable, geistMono.variable, 'pt-8')}>
+        <Typography.Title level={1} className="animate-bounce">
+          Title
+        </Typography.Title>
         <Button type="primary">Button</Button>
       </div>
     </>
