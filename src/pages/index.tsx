@@ -1,10 +1,13 @@
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { Button, Form, Input, Modal } from 'antd'
+
 import useUserStore from '@/stores/user'
 
 export default function Home() {
   const { name, token, setUser } = useUserStore()
   const [isOpen, setIsOpen] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     setIsOpen(true)
@@ -12,6 +15,7 @@ export default function Home() {
 
   const handleSubmit = (values: Record<string, string>) => {
     setUser(values.name, values.token)
+    router.push('/posts')
   }
 
   return (
