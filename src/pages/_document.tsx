@@ -9,7 +9,12 @@ import { createCache, extractStyle, StyleProvider } from '@ant-design/cssinjs'
 
 const MyDocument = () => (
   <Html lang="en">
-    <Head />
+    <Head>
+      <title>Blogpost App</title>
+      <meta name="description" content="A blogpost app" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
     <body>
       <Main />
       <NextScript />
