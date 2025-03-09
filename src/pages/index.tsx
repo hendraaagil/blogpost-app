@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Button, Form, Input, Modal } from 'antd'
+import useUserStore from '@/stores/user'
 
 export default function Home() {
+  const { name, token, setUser } = useUserStore()
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
@@ -9,7 +11,7 @@ export default function Home() {
   }, [])
 
   const handleSubmit = (values: Record<string, string>) => {
-    console.log('Received values of form: ', values)
+    setUser(values.name, values.token)
   }
 
   return (
@@ -20,7 +22,12 @@ export default function Home() {
       closeIcon={null}
       centered
     >
-      <Form layout="vertical" className="mt-8" onFinish={handleSubmit}>
+      <Form
+        layout="vertical"
+        className="mt-8"
+        onFinish={handleSubmit}
+        initialValues={{ name, token }}
+      >
         <Form.Item
           name="name"
           label="Name"
