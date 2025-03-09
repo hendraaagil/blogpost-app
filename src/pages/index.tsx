@@ -8,7 +8,7 @@ export default function Home() {
     setIsOpen(true)
   }, [])
 
-  const handleSubmit = (values: any) => {
+  const handleSubmit = (values: Record<string, string>) => {
     console.log('Received values of form: ', values)
   }
 
