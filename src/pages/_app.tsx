@@ -1,4 +1,5 @@
 import type { AppProps } from 'next/app'
+import Head from 'next/head'
 import { ConfigProvider } from 'antd'
 import { Geist, Geist_Mono } from 'next/font/google'
 
@@ -19,6 +20,12 @@ const geistMono = Geist_Mono({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ConfigProvider theme={theme}>
+      <Head>
+        <title>Blogpost App</title>
+        <meta name="description" content="A blogpost app" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <main className={cn(geistSans.variable, geistMono.variable)}>
         <Component {...pageProps} />
       </main>
