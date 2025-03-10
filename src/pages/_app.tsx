@@ -22,11 +22,6 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="description" content="A blogpost app" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <style jsx global>{`
-          html {
-            font-family: ${geistSans.style.fontFamily};
-          }
-        `}</style>
       </Head>
       <main className={geistSans.variable}>
         <QueryClientProvider client={queryClient}>
