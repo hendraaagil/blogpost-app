@@ -1,22 +1,6 @@
-import axios from '@/lib/axios'
 import { useQuery } from '@tanstack/react-query'
-
-type Meta = {
-  pagination: {
-    total: number
-    pages: number
-    page: number
-    limit: number
-  }
-}
-
-type Post = {
-  id: number
-  key: number
-  title: string
-  body: string
-  user_id: number
-}
+import { Meta, Post } from '@/types/post'
+import axios from '@/lib/axios'
 
 type PostsResponse = { data: Post[]; meta: Meta }
 
