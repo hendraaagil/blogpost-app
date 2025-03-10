@@ -59,3 +59,12 @@ export const useGetPost = (id: number) => {
     enabled: id > 0,
   })
 }
+
+export const updatePost = async (id: number, values: Partial<Post>) => {
+  try {
+    const { data } = await axios.put<Post>(`/posts/${id}`, values)
+    return data
+  } catch (error) {
+    throw error
+  }
+}

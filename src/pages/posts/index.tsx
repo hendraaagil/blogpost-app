@@ -31,10 +31,6 @@ export default function Posts() {
     router.push(`/posts/${post.id}`)
   }
 
-  const handleUpdate = (post: Post) => {
-    console.log('Update post', post)
-  }
-
   const handleDelete = (post: Post) => {
     console.log('Delete post', post)
   }
@@ -64,16 +60,6 @@ export default function Posts() {
               aria-label="View detail post"
             >
               <EyeOutlined />
-            </Button>
-          </Tooltip>
-          <Tooltip title="Update post">
-            <Button
-              color="green"
-              variant="outlined"
-              onClick={() => handleUpdate(row)}
-              aria-label="Update post"
-            >
-              <EditOutlined />
             </Button>
           </Tooltip>
           <Tooltip title="Delete post">
