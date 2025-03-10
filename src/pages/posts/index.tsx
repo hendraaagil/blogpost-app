@@ -1,28 +1,28 @@
 import { useGetPosts } from '@/lib/posts'
 import useUserStore from '@/stores/user'
-import { Button, Table, Typography } from 'antd'
+import { Button, Table } from 'antd'
+
+const columns = [
+  {
+    title: 'ID',
+    dataIndex: 'id',
+    key: 'id',
+  },
+  {
+    title: 'Title',
+    dataIndex: 'title',
+    key: 'title',
+  },
+  {
+    title: 'Action',
+    dataIndex: 'action',
+    key: 'action',
+  },
+]
 
 export default function Post() {
   const name = useUserStore((state) => state.name)
-  const { data: posts } = useGetPosts()
-
-  const columns = [
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      key: 'id',
-    },
-    {
-      title: 'Title',
-      dataIndex: 'title',
-      key: 'title',
-    },
-    {
-      title: 'Action',
-      dataIndex: 'action',
-      key: 'action',
-    },
-  ]
+  const { isLoading, data: posts } = useGetPosts()
 
   return (
     <section className="container mx-auto p-4">
@@ -32,8 +32,9 @@ export default function Post() {
       </div>
       <Table
         className="mt-4"
-        dataSource={posts ?? []}
+        dataSource={posts?.data ?? []}
         columns={columns}
+        loading={isLoading}
         pagination={{ position: [] }}
       />
     </section>
