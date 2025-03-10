@@ -41,3 +41,21 @@ export const useGetPosts = (params: GetPostsParams) => {
     queryFn: () => getPosts(params),
   })
 }
+
+const getPost = async (id: number): Promise<Post> => {
+  try {
+    const { data } = await axios.get<Post>(`/posts/${id}`)
+    return data
+  } catch (error) {
+    console.error(error)
+    return {} as Post
+  }
+}
+
+export const useGetPost = (id: number) => {
+  return useQuery({
+    queryKey: ['post', id],
+    queryFn: () => getPost(id),
+    enabled: id > 0,
+  })
+}
