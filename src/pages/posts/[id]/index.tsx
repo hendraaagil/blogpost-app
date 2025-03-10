@@ -87,7 +87,7 @@ export default function Detail() {
       >
         <Form
           layout="vertical"
-          className="mt-8"
+          className="mt-4 pt-4 border-t"
           onFinish={handleSubmit}
           initialValues={{ title: post?.title, body: post?.body }}
         >

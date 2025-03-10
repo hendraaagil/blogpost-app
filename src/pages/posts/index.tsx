@@ -1,12 +1,7 @@
 import { Button, Input, Space, Table, TableProps, Tooltip } from 'antd'
 import { useRouter } from 'next/router'
 import { useQueryState } from 'nuqs'
-import {
-  DeleteOutlined,
-  EditOutlined,
-  EyeOutlined,
-  SearchOutlined,
-} from '@ant-design/icons'
+import { DeleteOutlined, EyeOutlined, SearchOutlined } from '@ant-design/icons'
 
 import { Post } from '@/types/post'
 import { PageContainer } from '@/components/layouts'

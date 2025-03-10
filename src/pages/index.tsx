@@ -27,7 +27,7 @@ export default function Home() {
     >
       <Form
         layout="vertical"
-        className="mt-8"
+        className="mt-4 pt-4 border-t"
         onFinish={handleSubmit}
         initialValues={{ name, token }}
       >
