@@ -3,10 +3,13 @@ import { Meta, Post } from '@/types/post'
 import axios from '@/lib/axios'
 
 type PostsResponse = { data: Post[]; meta: Meta }
+type GetPostsParams = { search?: string }
 
-const getPosts = async (): Promise<PostsResponse> => {
+const getPosts = async (params: GetPostsParams): Promise<PostsResponse> => {
   try {
-    const { data, headers } = await axios.get<Post[]>('/posts')
+    const { data, headers } = await axios.get<Post[]>('/posts', {
+      params: { title: params.search || undefined },
+    })
     const meta = {
       pagination: {
         total: Number(headers['x-pagination-total']),
@@ -32,9 +35,9 @@ const getPosts = async (): Promise<PostsResponse> => {
   }
 }
 
-export const useGetPosts = () => {
+export const useGetPosts = (params: GetPostsParams) => {
   return useQuery({
-    queryKey: ['posts'],
-    queryFn: getPosts,
+    queryKey: ['posts', params],
+    queryFn: () => getPosts(params),
   })
 }
