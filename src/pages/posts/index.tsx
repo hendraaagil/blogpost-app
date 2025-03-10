@@ -9,6 +9,7 @@ import {
 } from '@ant-design/icons'
 
 import { Post } from '@/types/post'
+import { PageContainer } from '@/components/layouts'
 import { useGetPosts } from '@/lib/posts'
 import useDebounce from '@/hooks/use-debounce'
 import useUserStore from '@/stores/user'
@@ -91,11 +92,10 @@ export default function Posts() {
   ]
 
   return (
-    <section className="container mx-auto p-4">
-      <div className="flex justify-between items-center py-4 mb-4 border-b">
-        <p className="text-xl font-medium">Welcome, {name || '...'} 👋</p>
-        <Button type="primary">Create Post</Button>
-      </div>
+    <PageContainer
+      title={`Welcome, ${name || '...'} 👋`}
+      action={<Button type="primary">Create Post</Button>}
+    >
       <Input
         placeholder="Search by post title ..."
         prefix={<SearchOutlined />}
@@ -109,6 +109,6 @@ export default function Posts() {
         loading={isLoading}
         pagination={{ position: [] }}
       />
-    </section>
+    </PageContainer>
   )
 }
