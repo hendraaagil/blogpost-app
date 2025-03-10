@@ -34,8 +34,6 @@ export default function Home() {
         <Form.Item
           name="name"
           label="Name"
-          tooltip="This is a required field"
-          required
           rules={[{ required: true, message: 'Please input your name!' }]}
         >
           <Input placeholder="Input your name" />
@@ -43,8 +41,6 @@ export default function Home() {
         <Form.Item
           name="token"
           label="Go Rest Token"
-          tooltip="This is a required field"
-          required
           rules={[
             { required: true, message: 'Please input your Go Rest Token!' },
           ]}
