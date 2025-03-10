@@ -75,7 +75,11 @@ export default function Posts() {
   return (
     <PageContainer
       title={`Welcome, ${name || '...'} 👋`}
-      action={<Button type="primary">Create Post</Button>}
+      action={
+        <Button type="primary" onClick={() => router.push('/posts/create')}>
+          Create Post
+        </Button>
+      }
     >
       <Input
         placeholder="Search by post title ..."
