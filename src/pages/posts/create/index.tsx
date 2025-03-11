@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Post } from '@/types/post'
 import { PageContainer } from '@/components/layouts'
 import { useGetUsers } from '@/lib/users'
-import { createPost } from '@/lib/posts'
+import { createPost as createPostFn } from '@/lib/posts'
 
 export default function Create() {
   const queryClient = useQueryClient()
@@ -13,9 +13,9 @@ export default function Create() {
   const [toast, contextHolder] = notification.useNotification()
   const { isLoading: isLoadUsers, data: users } = useGetUsers()
 
-  const { mutate, isPending } = useMutation({
+  const { mutate: createPost, isPending: isSubmitting } = useMutation({
     mutationFn: (values: Pick<Post, 'body' | 'title' | 'user_id'>) =>
-      createPost(values),
+      createPostFn(values),
     onSuccess: () => {
       toast.success({
         message: 'Success',
@@ -40,7 +40,7 @@ export default function Create() {
   })
 
   const handleSubmit = (values: Pick<Post, 'body' | 'title' | 'user_id'>) => {
-    mutate(values)
+    createPost(values)
   }
 
   return (
@@ -82,7 +82,7 @@ export default function Create() {
               className="w-full"
               type="primary"
               htmlType="submit"
-              loading={isPending}
+              loading={isSubmitting}
             >
               Submit
             </Button>

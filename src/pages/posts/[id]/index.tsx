@@ -14,7 +14,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { Post } from '@/types/post'
 import { PageContainer } from '@/components/layouts'
-import { updatePost, useGetPost } from '@/lib/posts'
+import { updatePost as updatePostFn, useGetPost } from '@/lib/posts'
 
 export default function Detail() {
   const queryClient = useQueryClient()
@@ -25,9 +25,9 @@ export default function Detail() {
   )
 
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { mutate, isPending } = useMutation({
+  const { mutate: updatePost, isPending: isSubmitting } = useMutation({
     mutationFn: (values: Partial<Post>) =>
-      updatePost(post?.id as number, values),
+      updatePostFn(post?.id as number, values),
     onSuccess: () => {
       setIsModalOpen(false)
       toast.success({
@@ -52,7 +52,7 @@ export default function Detail() {
   })
 
   const handleSubmit = (values: Pick<Post, 'body' | 'title'>) => {
-    mutate({ ...values, id: post?.id })
+    updatePost({ ...values, id: post?.id })
   }
 
   return (
@@ -118,7 +118,7 @@ export default function Detail() {
                 className="w-full"
                 type="primary"
                 htmlType="submit"
-                loading={isPending}
+                loading={isSubmitting}
               >
                 Submit
               </Button>
