@@ -82,3 +82,11 @@ export const createPost = async (
     throw error
   }
 }
+
+export const deletePost = async (id: number) => {
+  try {
+    await axios.delete(`/posts/${id}`)
+  } catch (error) {
+    throw error
+  }
+}

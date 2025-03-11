@@ -1,18 +1,31 @@
-import { Button, Input, Space, Table, TableProps, Tooltip } from 'antd'
+import {
+  Button,
+  Input,
+  Modal,
+  notification,
+  Space,
+  Table,
+  TableProps,
+  Tooltip,
+} from 'antd'
+import { DeleteOutlined, EyeOutlined, SearchOutlined } from '@ant-design/icons'
 import { useRouter } from 'next/router'
 import { useQueryState } from 'nuqs'
-import { DeleteOutlined, EyeOutlined, SearchOutlined } from '@ant-design/icons'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { Post } from '@/types/post'
 import { PageContainer } from '@/components/layouts'
-import { useGetPosts } from '@/lib/posts'
+import { deletePost as deletePostFn, useGetPosts } from '@/lib/posts'
 import useDebounce from '@/hooks/use-debounce'
 import useUserStore from '@/stores/user'
 
 export default function Posts() {
+  const queryClient = useQueryClient()
   const router = useRouter()
   const name = useUserStore((state) => state.name)
 
+  const [modal, modalContext] = Modal.useModal()
+  const [toast, notificationContext] = notification.useNotification()
   const [search, setSearch] = useQueryState('search', {
     defaultValue: '',
     clearOnDefault: true,
@@ -22,12 +35,42 @@ export default function Posts() {
     search: debouncedSearch,
   })
 
+  const { mutate: deletePost } = useMutation({
+    mutationFn: deletePostFn,
+    onSuccess: () => {
+      toast.success({
+        message: 'Success',
+        description: 'Post successfully deleted!',
+        placement: 'top',
+        duration: 3,
+      })
+      queryClient.invalidateQueries({
+        queryKey: ['posts'],
+      })
+    },
+    onError: (error) => {
+      toast.error({
+        message: 'Error',
+        description:
+          error instanceof Error ? error.message : 'Something went wrong',
+        placement: 'top',
+        duration: 3,
+      })
+    },
+  })
+
   const handleView = (post: Post) => {
     router.push(`/posts/${post.id}`)
   }
 
   const handleDelete = (post: Post) => {
-    console.log('Delete post', post)
+    modal.confirm({
+      title: 'Delete post',
+      content: `Are you sure you want to delete post "${post.title}"?`,
+      onOk: () => {
+        deletePost(post.id)
+      },
+    })
   }
 
   const columns: TableProps<Post>['columns'] = [
@@ -95,6 +138,8 @@ export default function Posts() {
         loading={isLoading}
         pagination={{ position: [] }}
       />
+      {modalContext}
+      {notificationContext}
     </PageContainer>
   )
 }
