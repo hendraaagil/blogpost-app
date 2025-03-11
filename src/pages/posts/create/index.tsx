@@ -77,7 +77,7 @@ export default function Create() {
           <Input.TextArea placeholder="Input post body" rows={10} />
         </Form.Item>
         <Form.Item>
-          <div className="flex items-center gap-2 w-full">
+          <div className="flex w-full items-center gap-2">
             <Button
               className="w-full"
               type="primary"

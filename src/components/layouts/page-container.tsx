@@ -11,7 +11,7 @@ export const PageContainer = ({
   action,
 }: PageContainerProps) => (
   <section className="container mx-auto p-4">
-    <header className="flex justify-between items-center pb-4 mb-4 border-b">
+    <header className="mb-4 flex items-center justify-between border-b pb-4">
       <p className="text-xl font-medium">{title}</p>
       {action}
     </header>

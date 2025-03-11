@@ -87,7 +87,7 @@ export default function Detail() {
       >
         <Form
           layout="vertical"
-          className="mt-4 pt-4 border-t"
+          className="mt-4 border-t pt-4"
           onFinish={handleSubmit}
           initialValues={{ title: post?.title, body: post?.body }}
         >
@@ -106,7 +106,7 @@ export default function Detail() {
             <Input.TextArea placeholder="Input post body" rows={10} />
           </Form.Item>
           <Form.Item>
-            <div className="flex items-center gap-2 w-full">
+            <div className="flex w-full items-center gap-2">
               <Button
                 className="w-full"
                 onClick={() => setIsModalOpen(false)}
