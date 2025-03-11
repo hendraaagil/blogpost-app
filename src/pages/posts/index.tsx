@@ -77,7 +77,7 @@ export default function Posts() {
       title={`Welcome, ${name || '...'} 👋`}
       action={
         <Button type="primary" onClick={() => router.push('/posts/create')}>
-          Create Post
+          Create post
         </Button>
       }
     >
@@ -86,6 +86,7 @@ export default function Posts() {
         prefix={<SearchOutlined />}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+        allowClear
       />
       <Table
         className="mt-4"
