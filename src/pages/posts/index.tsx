@@ -3,6 +3,7 @@ import {
   Input,
   Modal,
   notification,
+  Pagination,
   Space,
   Table,
   TableProps,
@@ -26,13 +27,25 @@ export default function Posts() {
 
   const [modal, modalContext] = Modal.useModal()
   const [toast, notificationContext] = notification.useNotification()
+
   const [search, setSearch] = useQueryState('search', {
     defaultValue: '',
     clearOnDefault: true,
   })
+  const [currentPage, setCurrentPage] = useQueryState('page', {
+    defaultValue: '1',
+    clearOnDefault: true,
+  })
+  const [perPage, setPerPage] = useQueryState('per_page', {
+    defaultValue: '10',
+    clearOnDefault: true,
+  })
+
   const debouncedSearch = useDebounce(search, 500)
   const { isLoading, data: posts } = useGetPosts({
     search: debouncedSearch,
+    page: currentPage,
+    per_page: perPage,
   })
 
   const { mutate: deletePost } = useMutation({
@@ -136,7 +149,22 @@ export default function Posts() {
         dataSource={posts?.data ?? []}
         columns={columns}
         loading={isLoading}
-        pagination={{ position: [] }}
+        pagination={{
+          position: [],
+          pageSize: Number(perPage),
+        }}
+      />
+      <Pagination
+        className="mt-4 flex justify-end"
+        showSizeChanger
+        defaultPageSize={Number(perPage)}
+        onShowSizeChange={(_, size) => setPerPage(size.toString())}
+        defaultCurrent={Number(currentPage)}
+        onChange={(page) => setCurrentPage(page.toString())}
+        total={posts?.meta?.pagination.total}
+        showTotal={(total, [start, end]) =>
+          `Showing ${start} to ${end} of ${total} posts`
+        }
       />
       {modalContext}
       {notificationContext}

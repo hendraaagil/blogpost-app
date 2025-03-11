@@ -3,12 +3,16 @@ import { Meta, Post } from '@/types/post'
 import axios from '@/lib/axios'
 
 type PostsResponse = { data: Post[]; meta: Meta }
-type GetPostsParams = { search?: string }
+type GetPostsParams = { search?: string; page?: string; per_page?: string }
 
 const getPosts = async (params: GetPostsParams): Promise<PostsResponse> => {
   try {
     const { data, headers } = await axios.get<Post[]>('/posts', {
-      params: { title: params.search || undefined },
+      params: {
+        title: params.search || undefined,
+        page: params.page || undefined,
+        per_page: params.per_page || undefined,
+      },
     })
     const meta = {
       pagination: {
