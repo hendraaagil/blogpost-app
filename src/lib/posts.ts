@@ -68,3 +68,17 @@ export const updatePost = async (id: number, values: Partial<Post>) => {
     throw error
   }
 }
+
+export const createPost = async (
+  values: Pick<Post, 'body' | 'title' | 'user_id'>,
+) => {
+  try {
+    const { data } = await axios.post<Post>(
+      `/users/${values.user_id}/posts`,
+      values,
+    )
+    return data
+  } catch (error) {
+    throw error
+  }
+}
