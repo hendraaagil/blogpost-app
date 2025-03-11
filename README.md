@@ -43,11 +43,11 @@ Node.js `20.x` and `pnpm` is required to run this project.
 - [x] Credential access (name & token)
 - [x] List of posts
   - [x] Search by title
-  - [ ] Pagination
+  - [x] Pagination
 - [x] Detail post
 - [x] Update post
-- [ ] Create post
-- [ ] Delete post
+- [x] Create post
+- [x] Delete post
 
 ## Author
 
