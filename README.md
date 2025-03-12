@@ -1,6 +1,6 @@
 # Blogpost App
 
-Please visit: [https://blogpost.hndr.web.id/](https://blogpost.hndr.web.id/) for the live demo.
+Please visit: [https://blogpost.hndr.web.id/](https://blogpost.hndr.web.id/) for the live demo. Get the token from [Go REST](https://gorest.co.in/).
 
 ## Getting Started
 
