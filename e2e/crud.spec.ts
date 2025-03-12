@@ -1,4 +1,4 @@
-import test, { expect } from '@playwright/test'
+import test, { expect, Page, chromium } from '@playwright/test'
 
 const post = {
   title: 'Hello, World!',
@@ -86,5 +86,25 @@ test.describe('Update post', () => {
     await expect(
       page.getByRole('paragraph').filter({ hasText: post.body + ' Edited' }),
     ).toBeVisible()
+  })
+})
+
+test.describe('Delete posts', () => {
+  test('should able to delete posts', async ({ page }) => {
+    await page.goto('/posts')
+    const posts = await page.getByRole('row', { name: /hello, world/i }).all()
+
+    await Promise.all(
+      posts.map(async (post) => {
+        const button = post.getByRole('button', { name: 'Delete post' })
+        await button.click()
+
+        const dialog = page.getByRole('dialog')
+        const confirmButton = dialog.getByRole('button', { name: 'Yes' })
+        await confirmButton.click()
+
+        await expect(dialog).not.toBeVisible()
+      }),
+    )
   })
 })
