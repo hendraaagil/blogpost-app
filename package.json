@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "e2e": "playwright test",
+    "e2e:debug": "playwright test --debug",
+    "e2e:ui": "playwright test --ui",
+    "e2e:report": "playwright show-report"
   },
   "engines": {
     "node": "20.x"
@@ -26,11 +30,13 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.51.0",
     "@tanstack/eslint-plugin-query": "^5.67.2",
     "@types/node": "^20",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "autoprefixer": "^10.4.20",
+    "dotenv": "^16.4.7",
     "eslint": "^9",
     "eslint-config-next": "15.2.1",
     "postcss": "^8.5.3",
