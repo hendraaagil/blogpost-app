@@ -40,12 +40,12 @@ export default function Home() {
         </Form.Item>
         <Form.Item
           name="token"
-          label="Go Rest Token"
+          label="Go REST Token"
           rules={[
-            { required: true, message: 'Please input your Go Rest Token!' },
+            { required: true, message: 'Please input your Go REST Token!' },
           ]}
         >
-          <Input placeholder="Input your Go Rest Token" />
+          <Input placeholder="Input your Go REST Token" />
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit" className="w-full py-5">
