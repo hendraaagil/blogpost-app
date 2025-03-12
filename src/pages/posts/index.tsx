@@ -80,6 +80,9 @@ export default function Posts() {
     modal.confirm({
       title: 'Delete post',
       content: `Are you sure you want to delete post "${post.title}"?`,
+      okText: 'Yes',
+      cancelText: 'No',
+      centered: true,
       onOk: () => {
         deletePost(post.id)
       },

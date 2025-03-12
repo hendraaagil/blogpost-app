@@ -60,6 +60,8 @@ export default function Create() {
             placeholder="Select author"
             loading={isLoadUsers}
             options={users ?? []}
+            data-testid="author-select"
+            optionLabelProp="label"
           />
         </Form.Item>
         <Form.Item
